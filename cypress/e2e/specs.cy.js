@@ -1,18 +1,12 @@
-it('this is my first test', () => {
-    cy.visit("/");
-    cy.contains('new board');
-    cy.get('.board');
-    cy.get('#board-1');
-    cy.get('[data-cy=board-item]');
-    cy.contains('.board', 'new board');
+it('create a new list, new card, delete a list', () => {
+    cy.visit("/board/1");
+    cy.get('[data-cy="add-list-input"]')
+      .type('new list{enter}');
+    cy.contains('Add another card')
+      .type('new card{enter}');
+    cy.get('[data-cy="list-options"]')
+      .click();
+    cy.contains('Delete')
+      .click();
+});
 
-    cy.get('.board')
-      .first();
-    cy.get('.board')
-      .last();
-
-    cy.get('.board')
-      . eq(0);
-    cy.get('.board')
-      . eq(1);
-})
