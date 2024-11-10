@@ -1,8 +1,18 @@
 it('this is my first test', () => {
     cy.visit("/");
-    /* ==== Generated with Cypress Studio ==== */
-    cy.get('h2').click();
-    cy.get('[data-cy="add-list-input"]').clear();
-    cy.get('[data-cy="add-list-input"]').type('new list{enter}');
-    /* ==== End Cypress Studio ==== */
+    cy.contains('new board');
+    cy.get('.board');
+    cy.get('#board-1');
+    cy.get('[data-cy=board-item]');
+    cy.contains('.board', 'new board');
+
+    cy.get('.board')
+      .first();
+    cy.get('.board')
+      .last();
+
+    cy.get('.board')
+      . eq(0);
+    cy.get('.board')
+      . eq(1);
 })
