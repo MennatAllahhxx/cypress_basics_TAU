@@ -10,3 +10,9 @@ it('create a new list, new card, delete a list', () => {
       .click();
 });
 
+it.only('favourite this board', () => {
+  cy.visit('/');
+  cy.get('.star')
+    .first()
+    .click({force: true});
+});
