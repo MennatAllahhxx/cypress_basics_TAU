@@ -48,7 +48,7 @@ it('making assertions', () => {
     .should('have.text','bread');
 });
 
-it.only('chaining', {defaultCommandTimeout: 6000}, () => {
+it('chaining', {defaultCommandTimeout: 6000}, () => {
   cy.visit("/board/1");
 
   cy.get('[data-cy="list"]', {timeout: 7000})
@@ -62,3 +62,20 @@ it.only('chaining', {defaultCommandTimeout: 6000}, () => {
   cy.get('[data-cy=card-detail-title]')
     .should('have.value', 'soap');
 });
+
+it.only('plugin', () => {
+  cy.visit('/');
+  cy.get('[data-cy=board-item]')
+    .should('be.visible');
+  cy.eyesCheckWindow();
+});
+
+beforeEach(() => {
+  cy.eyesOpen({
+    appName: 'Trello app'
+  });
+});
+
+afterEach(() => {
+  cy.eyesClose();
+})
