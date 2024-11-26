@@ -19,7 +19,7 @@ it('favourite this board', () => {
     .click({force: true});
 });
 
-it.only('making assertions', () => {
+it('making assertions', () => {
   cy.visit('/board/1');
 
   cy.get('[data-cy="new-card"]')
@@ -46,4 +46,19 @@ it.only('making assertions', () => {
   cy.get('[data-cy="card-text"')
     .first()
     .should('have.text','bread');
-})
+});
+
+it.only('chaining', {defaultCommandTimeout: 6000}, () => {
+  cy.visit("/board/1");
+
+  cy.get('[data-cy="list"]', {timeout: 7000})
+    .eq(1)
+    .contains('[data-cy="card"]', "Nov 20 2023");
+  
+  cy.get('[data-cy=card') //query
+    .last() //query
+    .should('contains.text', 'soap') //assertion
+    .click(); //action
+  cy.get('[data-cy=card-detail-title]')
+    .should('have.value', 'soap');
+});
