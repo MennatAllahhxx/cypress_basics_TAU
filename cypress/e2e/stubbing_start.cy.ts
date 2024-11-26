@@ -1,4 +1,4 @@
-it.only('getting a list of boards', () => {
+it('getting a list of boards', () => {
     cy.intercept({
         method: 'GET',
         url: '/api/boards'
@@ -14,3 +14,20 @@ it.only('getting a list of boards', () => {
 
     cy.visit('/');
 });
+
+it.only('shows an error message when creating a board', () => {
+    cy.intercept({
+        method: 'POST',
+        url: '/api/boards'
+    }, {
+        statusCode: 500
+    }).as('boardCreate');
+
+    cy.visit('/');
+    cy.get('[data-cy=create-board]')
+      .click();
+    cy.get('[data-cy=new-board-input]')
+      .type('test board{enter}');
+    cy.get('[data-cy=notification-message]')
+      .should('be.visible');
+})
